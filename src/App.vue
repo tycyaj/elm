@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <t-Header :seller="seller"></t-Header>
-    <div class="tab border-1px">
+    <div class="tab border-1px-bottom">
       <router-link :seller="seller" tag="li" to="/goods">商品</router-link>
       <router-link tag="li" to="/ratings">评论</router-link>
       <router-link tag="li" to="/seller">商家</router-link>
@@ -43,7 +43,7 @@ export default {
   height: 80px;
   line-height: 80px;
   background #fff;
-  border-1px(rgba(7, 17, 27, 0.1));
+  border-1px-bottom(rgba(7, 17, 27, 0.1));
 
   li {
     width: 100%;

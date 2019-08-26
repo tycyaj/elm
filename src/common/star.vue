@@ -1,11 +1,11 @@
 <template>
   <div class="star" :class="starType">
-    <span
-      v-for="(itemClass,index) in itemClasses"
-      :key="index"
-      :class="itemClass"
-      class="star-item"
-    ></span>
+      <span
+        v-for="(itemClass,index) in itemClasses"
+        :key="index"
+        :class="itemClass"
+        class="star-item"
+      ></span>
   </div>
 </template>
 <script>
@@ -58,7 +58,6 @@ export default {
 @import '../assets/css/mixin.styl';
 
 .star {
-  text-align center
   .star-item {
     display: inline-block;
     background-repeat: no-repeat;
@@ -93,9 +92,11 @@ export default {
     .star-item {
       width: 30px;
       height: 30px;
-      margin-right: 32px;
+      margin-right: 24px;
       background-size: 30px 30px;
-
+      @media screen and (max-width 320px){
+        margin-right: 14px;
+      }
       &.last-child {
         margin-right: 0;
       }

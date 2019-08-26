@@ -4,7 +4,7 @@ border-1px($color)
     display: block
     position: absolute
     left: 0
-    bottom: 0
+    top: 0
     width: 100%
     border-top: 1PX solid $color
     content: ' '
@@ -24,6 +24,40 @@ border-1px-bottom($color)
     border-bottom: 1PX solid $color
     content: ' '
 
+border-1px-top($color)
+  position relative
+  &::before
+    display: block
+    position: absolute
+    left: 0
+    top: 0
+    width:100%
+    border-top: 1PX solid $color
+    content: ' '
+    
+border-1px-right($color)
+  position relative
+  &::after
+    display: block
+    position: absolute
+    top: 0
+    right: 0
+    width:100%
+    border-right: 1PX solid $color
+    content: ' '
+    
+border-1px-all($color)
+  position relative
+  &::after
+    display: block
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    width:100%
+    border: 1PX solid $color
+    content: ' '
 
 bg-image($url)
   background-image: url("../../assets/img/" + $url + "@2x.png")

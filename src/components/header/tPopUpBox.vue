@@ -4,7 +4,9 @@
       <div class="box-main">
         <p class="top-title">{{seller.name}}</p>
         <!-- 传递的size 星图片的大小  -->
-        <star :size="48" :score="seller.score"></star>
+        <div style="text-align:center">
+          <star :size="48" :score="seller.score"></star>
+        </div>
         <div class="title">
           <div class="line"></div>
           <div class="text">优惠信息</div>
