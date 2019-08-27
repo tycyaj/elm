@@ -30,12 +30,19 @@
         :only-content="onlyContent"
         :desc="desc"
         :ratings="ratings"
+        @selectRatingtype="selectRatingtype"
+        @contentToggle="contentToggle"
       ></ratingselect>
       <div class="ratings-wrapper">
         <ul>
-          <li class="rating-item border-1px-bottom" v-for="(rating,index) in ratings" :key="index">
+          <li
+            class="rating-item border-1px-bottom"
+            v-for="(rating,index) in ratings"
+            :key="index"
+            v-show="needShow(rating.rateType,rating.text)"
+          >
             <div class="avatar">
-              <img :src="rating.avatar" alt />
+              <img :src="rating.avatar" />
             </div>
             <div class="content">
               <h1 class="name">{{rating.username}}</h1>
@@ -65,8 +72,7 @@ import ratingselect from "components/ratingselect/ratingselect";
 import { filterDate } from "common/js/date";
 import BSscroll from "better-scroll";
 // 选择类型
-const POSITIVE = 0; //正向评价
-const NEGATIVE = 1; //负面评价
+
 const ALL = 2; //全部评价
 export default {
   name: "raitings",
@@ -84,6 +90,30 @@ export default {
       }
     };
   },
+  methods: {
+    needShow(type, text) {
+      if (this.onlyContent && !text) {
+        return false;
+      }
+      if (this.selectType === ALL) {
+        return true;
+      } else {
+        return type === this.selectType;
+      }
+    },
+    selectRatingtype(type) {
+      this.selectType = type;
+      this.$nextTick(() => {
+        this.scroll.refresh();  
+      });
+    },
+    contentToggle(onlyContented) {
+      this.onlyContent = onlyContented;
+      this.$nextTick(() => {
+        this.scroll.refresh();
+      });
+    }
+  },
   filters: {
     formatDate(time) {
       let date = new Date(time);
@@ -99,7 +129,6 @@ export default {
         const data = res.data;
         if (res.status === 200 && data.status === 1) {
           this.ratings = data.data;
-          console.log(this.ratings);
 
           this.$nextTick(() => {
             this.scroll = new BSscroll(this.$refs.raitingsEl, {
@@ -290,7 +319,7 @@ export default {
               span {
                 display: inline-block;
                 padding: 4px 12px;
-								border:1px solid rgba(7, 17, 27, 0.1);
+                border: 1px solid rgba(7, 17, 27, 0.1);
                 // border-1px-all(rgba(7, 17, 27, 0.1));
                 background: #fff;
                 border-radius: 2px;
@@ -307,10 +336,10 @@ export default {
           position: absolute;
           right: 0;
           top: 36px;
-					font-size 20px;
-					font-weight 200;
-					line-height 36px;
-					color:rgb(147,153,159);
+          font-size: 20px;
+          font-weight: 200;
+          line-height: 36px;
+          color: rgb(147, 153, 159);
         }
       }
     }

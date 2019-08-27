@@ -75,8 +75,6 @@ import split from "components/split/split";
 import ratingselect from "components/ratingselect/ratingselect";
 import {filterDate} from 'common/js/date' 
 // 选择类型
-const POSITIVE = 0; //正向评价
-const NEGATIVE = 1; //负面评价
 const ALL = 2; //全部评价
 export default {
   data() {
@@ -129,7 +127,6 @@ export default {
       })
     },
     contentToggle(onlyContented){
-      console.log(onlyContented)
       this.onlyContent = onlyContented
       this.$nextTick(()=>{
         this.scroll.refresh();
